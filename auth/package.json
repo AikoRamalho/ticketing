@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "rimraf ./build && tsc",
+    "custom": "echo hi",
     "start": "npx nodemon"
   },
   "keywords": [],
