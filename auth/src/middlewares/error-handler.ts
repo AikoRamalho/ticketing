@@ -3,6 +3,6 @@ export const errorHandler = (err: Error, req: Request, res: Response, next: Next
   console.log('something went wrong');
 
   res.send(400).send({
-    message: "Something went wrong"
+    message: err.message
   });
 };
