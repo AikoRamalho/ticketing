@@ -5,17 +5,11 @@ export const errorHandler = (err: Error, req: Request, res: Response, next: Next
   console.log('something went wrong');
 
   if (err instanceof RequestValidationError) {
-    const formattedErrors = err.errors.map(err => {
-      return {
-        message: err.msg,
-        field: err.param
-      }
-    })
-    return res.status(400).send({errors: formattedErrors})
+    return res.status(err.statusCode).send({ errors: err.serializeErrors() })
   }
 
   if (err instanceof DatabaseConnectionError) {
-    return res.status(500).send({ errors: [{ message: err.reason }] })
+    return res.status(err.statusCode).send({ errors: err.serializeErrors() })
   }
 
   res.send(400).send({
